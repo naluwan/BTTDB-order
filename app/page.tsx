@@ -8,6 +8,7 @@ import { OrderSummary } from '@/components/order-summary';
 import useSWR from 'swr';
 import { Category, MenuItem, OrderItem } from '@/types';
 import Image from 'next/image';
+import Logo from '@/public/logo.png';
 
 const Home = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -64,7 +65,7 @@ const Home = () => {
     <div className='container mx-auto p-4'>
       <div className='mb-4 flex flex-col items-center justify-between gap-2 md:flex-row'>
         <div className='flex items-center justify-center gap-2'>
-          <Image src='/logo.png' alt='昔日大飯店' width={40} height={40} />
+          <Image src={Logo} alt='昔日大飯店' width={40} height={40} />
           <h1 className='text-2xl font-bold'>昔日大飯店點餐系統</h1>
         </div>
 
