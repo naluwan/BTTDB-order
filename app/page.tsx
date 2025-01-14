@@ -7,6 +7,7 @@ import { MenuDisplay } from '@/components/menu-display';
 import { OrderSummary } from '@/components/order-summary';
 import useSWR from 'swr';
 import { Category, MenuItem, OrderItem } from '@/types';
+import Image from 'next/image';
 
 const Home = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -61,10 +62,14 @@ const Home = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      <div className='mb-4 flex justify-between'>
-        <h1 className='text-2xl font-bold'>昔日大飯店點餐系統</h1>
-        <Link href='/manage'>
-          <Button>管理類別和餐點</Button>
+      <div className='mb-4 flex flex-col items-center justify-between gap-2 md:flex-row'>
+        <div className='flex items-center justify-center gap-2'>
+          <Image src='/logo.png' alt='昔日大飯店' width={40} height={40} />
+          <h1 className='text-2xl font-bold'>昔日大飯店點餐系統</h1>
+        </div>
+
+        <Link href='/manage' className='w-full md:w-auto'>
+          <Button className='w-full md:w-auto'>管理類別和餐點</Button>
         </Link>
       </div>
       <div className='flex flex-col gap-6 md:flex-row'>

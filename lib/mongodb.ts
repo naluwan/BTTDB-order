@@ -1,7 +1,7 @@
 // lib/mongodb.ts
 import mongoose, { Mongoose } from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || '';
 
 if (!MONGODB_URI) {
   throw new Error('MongoDB URI錯誤');
@@ -22,7 +22,7 @@ const cached: MongooseCache = globalWithMongoose.mongoose || {
 if (!cached.conn && !cached.promise) {
   cached.promise = mongoose
     .connect(MONGODB_URI, {
-      bufferCommands: false,
+      bufferCommands: true,
     })
     .then((mongoose) => {
       console.log('MongoDB 連線成功');
@@ -37,7 +37,7 @@ async function connect(): Promise<Mongoose> {
   }
   if (!cached.promise) {
     const opts = {
-      bufferCommands: false,
+      bufferCommands: true,
     };
 
     cached.promise = mongoose.connect(MONGODB_URI as string, opts).then((mongoose) => {
