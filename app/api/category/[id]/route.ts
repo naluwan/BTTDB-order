@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connect from '@/lib/mongodb';
 import Category from '@/models/Category';
+import MenuItem from '@/models/MenuItem';
 connect();
 
 export async function DELETE(
@@ -9,6 +10,20 @@ export async function DELETE(
 ): Promise<NextResponse> {
   try {
     const { id } = params;
+
+    const category = await Category.findById(id).populate({
+      path: 'menuItems', // 填充的字段名稱（需要在 Category 模型中虛擬化設置）
+      model: MenuItem, // 關聯的模型
+    });
+
+    console.log(category);
+
+    if (category?.menuItems.length > 0) {
+      return NextResponse.json({
+        message: '請先刪除類別下所有餐點再進行類別刪除',
+        status: 400,
+      });
+    }
 
     const deleteCategory = await Category.findByIdAndDelete(id);
 
