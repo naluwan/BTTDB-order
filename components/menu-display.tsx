@@ -11,6 +11,7 @@ interface MenuDisplayProps {
 export const MenuDisplay = ({ categories, onAddToOrder }: MenuDisplayProps) => {
   return (
     <div className='space-y-6'>
+      <h2 className='text-xl font-bold'>菜單</h2>
       {categories?.map((category) => (
         <div key={category._id}>
           <h2 className='mb-2 text-xl font-bold'>{category.name}</h2>
